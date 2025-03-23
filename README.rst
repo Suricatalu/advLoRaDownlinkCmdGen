@@ -31,41 +31,36 @@ On macOS
 Quick Start
 -----------
 
-In the ``./main.py`` file, the code responsible for generating time synchronization commands is presented below:
+In ``./src/main.py``, tests are integrated for the following three products:
+  - WISE-2410
+  - WISE-4610
+  - WISE-2200-M
 
-The user has the ability to modify the ``./main.py`` file to generate the other downlink commands for other devices.
-
-*For further information on the supported functions of this repository, please refer to the last section of this document.*
-
-.. code-block:: python
-
-    import shared.downlinkFields as DWHDR
-    from products.WISE2410 import WISE2410
-
-    def wise2410testtimesync():
-        device = WISE2410()
-
-        cmd = device.time_sync(
-            type=DWHDR.TIMESYNC_TYPE_I,
-            fcnt=0,
-            timestamp="2020-06-23T10:16:07+08:00",
-            version=0
-        )
-
-        print(f"Generated WISE-2410 Command: {cmd}")
-
-    def main():
-        wise2410testtimesync()
-
-    if __name__ == "__main__":
-        main()
-
-Then, the user can execute the below command to generate the downlink command.
-
+To run the tests, execute the following command:
+ 
 .. code-block:: shell
 
-    pipenv run python ./src/main.py 
-    # Output: Generated WISE-2410 Command: 80001d611b02323032302d30362d32335431303a31363a30372b30383a30300066
+    pipenv run python ./src/main.py
+
+After running, the downlink commands for each product will be output sequentially, for example:
+ 
+.. code-block:: shell
+
+    === WISE-2410 Tests ===
+    Generated WISE-2410 FFT Command: [command output]
+    Generated WISE-2410 TimeSync Command: [command output]
+    Generated WISE-2410 Uplink Interval Command: [command output]
+    
+    === WISE-4610 Tests ===
+    Generated WISE-4610 TimeSync Command: [command output]
+    Generated WISE-4610 Uplink Interval Command: [command output]
+    
+    === WISE-2200-M Tests ===
+    Generated WISE-2200-M TimeSync Command: [command output]
+    Generated WISE-2200-M Uplink Interval Command: [command output]
+    Generated WISE-2200-M Transparent Command: [command output]
+
+*For further information on the supported functions of this repository, please refer to the last section of this document.*
 
 Supported Function
 ------------------
